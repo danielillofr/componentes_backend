@@ -1,4 +1,5 @@
 const Componente = require('./../models/componente');
+const Movimiento = require('./../models/movimiento');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const app = express();
@@ -24,6 +25,30 @@ app.get('/api/componentes', Autentificar, function(req, res) {
         })
     })
 })
+
+app.get('/api/componentes/:id', Autentificar, function(req, res) {
+    if (!req.params.id) {
+        return res.json({
+            ok: false,
+            err: 'Hay que indicar el componente'
+        })
+    }
+
+    Componente.findById(req.params.id, (err, componente) => {
+        if (err) {
+            return res.status(200).json({
+                ok: false,
+                errBaseDatos: true,
+                err
+            })
+        }
+        res.status(200).json({
+            ok: true,
+            componente
+        })
+    })
+})
+
 
 
 //Creacion de un nuevo componente
