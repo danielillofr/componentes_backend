@@ -15,6 +15,14 @@ const movimientoSchema = new Schema({
     cantidad: {
         type: String,
         required: [true, 'La cantidad es obligatoria']
+    },
+    fechaMovimiento: {
+        type: String,
+        require: [true, 'La fecha es requerida']
+    },
+    autor: {
+        type: String,
+        require: [true, 'El autor es requerido']
     }
 })
 

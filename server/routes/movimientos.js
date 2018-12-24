@@ -41,10 +41,14 @@ app.post('/api/movimientos', Autentificar, (req, res) => {
             err: 'Componente, almacen y cantidad son requeridos'
         })
     }
+    const f = new Date();
+    const fechaMovimiento = f.getDate() + '/' + (f.getMonth() + 1) + '/' + f.getFullYear();
     let movimiento = new Movimiento({
         componente: body.componente,
         almacen: body.almacen,
         cantidad: body.cantidad,
+        fechaMovimiento,
+        autor: req.usuario.nombre
     })
     movimiento.save((err, movimientoDB) => {
         if (err) {

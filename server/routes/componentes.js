@@ -68,6 +68,7 @@ app.post('/api/componentes', Autentificar, (req, res) => {
         descripcion: body.descripcion,
         fechaEntrada: body.fechaEntrada,
         cantidad: body.cantidad,
+        estado: body.estado
     })
     componente.save((err, componenteDB) => {
         if (err) {
@@ -110,6 +111,15 @@ app.delete('/api/componentes/:id', Autentificar, (req, res) => {
                 err: 'No hay componente con ese ID en la base de datos'
             })
         }
+        Movimiento.deleteMany({ componente: componenteDB._id }, (err) => {
+            if (err) {
+                return res.json({
+                    ok: false,
+                    errBaseDatos: true,
+                    err
+                })
+            }
+        })
         res.status(200).json({
             ok: true,
             componente: componenteDB

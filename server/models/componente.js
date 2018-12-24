@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
 
+let estadosValidos = {
+    values: ['SOLICITADA', 'HOMOLOGANDO', 'RECHAZADA', 'HOMOLOGADA', 'NO_APLICA'],
+    message: '{VALUE} no es un estado válido'
+}
+
 const componenteSchema = new Schema({
     referencia: {
         type: String,
@@ -24,6 +29,11 @@ const componenteSchema = new Schema({
         type: Number,
         required: [true, 'La referencia es obligatorio']
     },
+    estado: {
+        type: String,
+        default: 'SOLICITADA',
+        enum: estadosValidos
+    }
 })
 
 componenteSchema.plugin(uniqueValidator, { message: '{PATH} debe ser unico' })
