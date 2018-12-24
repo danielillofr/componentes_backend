@@ -131,7 +131,7 @@ app.delete('/api/componentes/:id', Autentificar, (req, res) => {
 app.put('/api/componentes/:id', Autentificar, (req, res) => {
     let body = req.body;
     let id = req.params.id;
-    body = _.pick(body, ['referencia', 'fabricante', 'descripcion', 'fechaEntrada', 'cantidad']);
+    body = _.pick(body, ['estado']); //Solo se puede modificar el estado
     Componente.findByIdAndUpdate(id, body, { new: true }, (err, componenteDB) => {
         if (err) {
             return res.status(200).json({
