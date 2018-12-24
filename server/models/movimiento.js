@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
 
+let estadosValidos = {
+    values: ['SOLICITADA', 'HOMOLOGANDO', 'RECHAZADA', 'HOMOLOGADA', 'NO_APLICA'],
+    message: '{VALUE} no es un estado válido'
+}
+
 const movimientoSchema = new Schema({
     componente: {
         type: Schema.Types.ObjectId,
@@ -23,6 +28,11 @@ const movimientoSchema = new Schema({
     autor: {
         type: String,
         require: [true, 'El autor es requerido']
+    },
+    estado: {
+        type: String,
+        default: 'SOLICITADA',
+        enum: estadosValidos
     }
 })
 
