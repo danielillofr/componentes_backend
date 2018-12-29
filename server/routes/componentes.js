@@ -68,7 +68,9 @@ app.post('/api/componentes', Autentificar, (req, res) => {
         descripcion: body.descripcion,
         fechaEntrada: body.fechaEntrada,
         cantidad: body.cantidad,
-        estado: body.estado
+        estado: body.estado,
+        urgencia: body.urgencia,
+        motivo: body.motivo
     })
     componente.save((err, componenteDB) => {
         if (err) {

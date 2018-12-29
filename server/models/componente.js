@@ -7,6 +7,11 @@ let estadosValidos = {
     message: '{VALUE} no es un estado válido'
 }
 
+let urgenciasValidas = {
+    values: ['MUY URGENTE', 'URGENTE', 'NECESARIO', 'MEJORA'],
+    message: '{VALUE} no es una urgencia válida'
+}
+
 const componenteSchema = new Schema({
     referencia: {
         type: String,
@@ -33,6 +38,15 @@ const componenteSchema = new Schema({
         type: String,
         default: 'SOLICITADA',
         enum: estadosValidos
+    },
+    urgencia: {
+        type: String,
+        default: 'URGENTE',
+        enum: urgenciasValidas
+    },
+    motivo: {
+        type: String,
+        required: [true, 'El motivo es requerido']
     }
 })
 
