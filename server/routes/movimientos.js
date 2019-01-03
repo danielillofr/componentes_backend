@@ -5,7 +5,13 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const _ = require('underscore');
 
+const Componente = require('./../models/componente');
+
 const { Autentificar } = require('./../middlewares/Autentificar');
+
+const { Enviar_mail } = require('./../utils/mail')
+
+const { mailListModificacion } = require('./../config/maillists')
 
 //Obtener un listado con todos los componentes. Cualquier usuario
 
@@ -60,6 +66,30 @@ app.post('/api/movimientos', Autentificar, (req, res) => {
                 err
             })
         }
+        Componente.findById(body.componente, (err, componenteDB) => {
+            if ((!err) && (body.almacen === '--')) {
+                let Asunto = 'Cambio en el componente con referencia ' + componenteDB.referencia;
+
+                let texto = req.usuario.nombre + ' ha modificado el estado del componente ' + componenteDB.referencia;
+
+
+                let html = '<br>' + texto +
+                    '<br>Referencia: ' + componenteDB.referencia +
+                    '<br>Nuevo estado: ' + body.estado +
+                    '<br>Motivo: ' + body.motivo;
+
+
+                let mailOptions = {
+                    from: 'Componentes',
+                    to: mailListModificacion,
+                    subject: Asunto,
+                    html
+                }
+
+                Enviar_mail(mailOptions);
+            }
+        })
+
         res.status(200).json({
             ok: true,
             movimiento: movimientoDB

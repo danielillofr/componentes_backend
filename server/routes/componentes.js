@@ -6,6 +6,10 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const _ = require('underscore');
 
+const { Enviar_mail } = require('./../utils/mail');
+
+const { mailListCrear } = require('./../config/maillists')
+
 const { Autentificar } = require('./../middlewares/Autentificar');
 
 //Obtener un listado con todos los componentes. Cualquier usuario
@@ -80,6 +84,28 @@ app.post('/api/componentes', Autentificar, (req, res) => {
                 err
             })
         }
+
+        let Asunto = 'Nuevo componente con referencia ' + body.referencia + ' creado con el estado ' + body.estado;
+
+        let texto = req.usuario.nombre + ' ha creado el componente con referencia ' + body.referencia + ' y el estado ' + body.estado;
+
+        let html = '<br>' + texto +
+            '<br>Referencia: ' + componente.referencia +
+            '<br>Fabricante: ' + componente.fabricante +
+            '<br>Estado: ' + componente.estado +
+            '<br>Urgencia: ' + componente.urgencia +
+            '<br>Motivo: ' + componente.motivo;
+
+
+        let mailOptions = {
+            from: 'Componentes',
+            to: mailListCrear,
+            subject: Asunto,
+            html
+        }
+
+        Enviar_mail(mailOptions);
+
         res.status(200).json({
             ok: true,
             componente: componenteDB
@@ -142,6 +168,7 @@ app.put('/api/componentes/:id', Autentificar, (req, res) => {
                 err
             })
         }
+
         res.status(200).json({
             ok: true,
             componente: componenteDB
