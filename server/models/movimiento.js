@@ -33,7 +33,12 @@ const movimientoSchema = new Schema({
         type: String,
         default: 'SOLICITADA',
         enum: estadosValidos
+    },
+    motivo: {
+        type: String,
+        default: ''
     }
+
 })
 
 movimientoSchema.plugin(uniqueValidator, { message: '{PATH} debe ser unico' })

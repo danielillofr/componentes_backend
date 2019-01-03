@@ -49,7 +49,8 @@ app.post('/api/movimientos', Autentificar, (req, res) => {
         cantidad: body.cantidad,
         fechaMovimiento,
         autor: req.usuario.nombre,
-        estado: body.estado
+        estado: body.estado,
+        motivo: body.motivo
     })
     movimiento.save((err, movimientoDB) => {
         if (err) {
