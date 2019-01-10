@@ -74,7 +74,8 @@ app.post('/api/componentes', Autentificar, (req, res) => {
         cantidad: body.cantidad,
         estado: body.estado,
         urgencia: body.urgencia,
-        motivo: body.motivo
+        motivo: body.motivo,
+        codAirzone: body.codAirzone
     })
     componente.save((err, componenteDB) => {
         if (err) {
@@ -94,7 +95,8 @@ app.post('/api/componentes', Autentificar, (req, res) => {
             '<br>Fabricante: ' + componente.fabricante +
             '<br>Estado: ' + componente.estado +
             '<br>Urgencia: ' + componente.urgencia +
-            '<br>Motivo: ' + componente.motivo;
+            '<br>Motivo: ' + componente.motivo +
+            '<br>Código Airzone: ' + componente.codAirzone;
 
 
         let mailOptions = {

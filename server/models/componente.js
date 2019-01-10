@@ -47,6 +47,10 @@ const componenteSchema = new Schema({
     motivo: {
         type: String,
         required: [true, 'El motivo es requerido']
+    },
+    codAirzone: {
+        type: String,
+        default: ''
     }
 })
 
