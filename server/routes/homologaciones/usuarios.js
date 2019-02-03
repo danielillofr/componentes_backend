@@ -1,11 +1,11 @@
-const Usuario = require('./../models/usuario');
+const Usuario = require('./../../models/homologaciones/usuario');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const app = express();
 const jwt = require('jsonwebtoken');
 const _ = require('underscore');
 
-const { Autentificar, AutentificarAdmin, AutentificarAdminOUser } = require('./../middlewares/Autentificar');
+const { Autentificar, AutentificarAdmin, AutentificarAdminOUser } = require('./../../middlewares/Autentificar');
 
 //Obtener un listado con todos los usuarios. Solo administrador
 
@@ -28,7 +28,7 @@ app.get('/api/usuarios', Autentificar, function(req, res) {
 
 //Creacion de un nuevo usuario
 
-app.post('/api/usuarios', (req, res) => {
+app.post('/api/usuarios', [Autentificar, AutentificarAdmin], (req, res) => {
     let body = req.body;
     if ((!body.nombre) || (!body.clave)) {
         return res.status(200).json({

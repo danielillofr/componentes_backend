@@ -1,0 +1,21 @@
+Prototipos
+
+   Proyecto 
+   -    Nombre del proyecto
+   -    Código de lista
+       
+
+   Componentes
+    -   Proyecto
+    -   Referencia
+    -   URL
+    -   Cantidad
+    -   Descripción
+    -   Estado
+        *   Valores: 
+            -   Solicitado
+            -   Comprado
+            -   No disponible
+            -   Homologado
+            -   Rechazado
+    -   CodAirzone

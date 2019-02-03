@@ -22,9 +22,11 @@ app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, '../public')));
 // app.use(express.static(path.resolve(__dirname, './../../TodoList/dist/ftsock')));
 
-app.use(require('./routes/usuarios'));
-app.use(require('./routes/componentes'));
-app.use(require('./routes/movimientos'));
+app.use(require('./routes/homologaciones/usuarios'));
+app.use(require('./routes/homologaciones/componentes'));
+app.use(require('./routes/homologaciones/movimientos'));
+
+app.use(require('./routes/prototipos/prcomponentes'));
 
 app.listen(process.env.PORT, () => {
     console.log('Escuchando puerto: ', 3000);

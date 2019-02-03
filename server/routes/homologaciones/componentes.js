@@ -1,16 +1,16 @@
-const Componente = require('./../models/componente');
-const Movimiento = require('./../models/movimiento');
+const Componente = require('./../../models/homologaciones/componente');
+const Movimiento = require('./../../models/homologaciones/movimiento');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const app = express();
 const jwt = require('jsonwebtoken');
 const _ = require('underscore');
 
-const { Enviar_mail } = require('./../utils/mail');
+const { Enviar_mail } = require('./../../utils/mail');
 
-const { mailListCrear } = require('./../config/maillists')
+const { mailListCrear } = require('./../../config/maillists')
 
-const { Autentificar } = require('./../middlewares/Autentificar');
+const { Autentificar } = require('./../../middlewares/Autentificar');
 
 //Obtener un listado con todos los componentes. Cualquier usuario
 
