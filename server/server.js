@@ -27,6 +27,7 @@ app.use(require('./routes/homologaciones/componentes'));
 app.use(require('./routes/homologaciones/movimientos'));
 
 app.use(require('./routes/prototipos/prcomponentes'));
+app.use(require('./routes/prototipos/proyectos'));
 
 app.listen(process.env.PORT, () => {
     console.log('Escuchando puerto: ', 3000);

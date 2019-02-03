@@ -9,7 +9,9 @@ let estadosValidos = {
 
 const prcomponenteSchema = new Schema({
     proyecto: {
-        type: String
+        type: Schema.Types.ObjectId,
+        ref: 'Proyecto',
+        required: [true, 'El proyecto es obligatorio']
     },
     referencia: {
         type: String,

@@ -19,6 +19,7 @@ app.get('/api/movimientos/:id', Autentificar, function(req, res) {
     if (!req.params.id) {
         return res.json({
             ok: false,
+            errBaseDatos: false,
             err: 'Hay que indicar el componente'
         })
     }
