@@ -10,6 +10,7 @@ const { Autentificar } = require('./../../middlewares/Autentificar');
 app.get('/api/proyectos', Autentificar, (req, res) => {
     Proyecto.find({}, (err, proyectosDB) => {
         if (err) {
+            console.log(err);
             return res.json({
                 ok: false,
                 errBaseDatos: true,

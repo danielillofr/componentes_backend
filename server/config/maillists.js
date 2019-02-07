@@ -3,10 +3,10 @@ const emailSender = {
     password: 'altraAirzone'
 }
 
-
+const enviarEmail = false;
 
 const mailListCrear = ['dfdezruiz@gmail.com', 'dfernandez@altracorporacion.es'];
 
 const mailListModificacion = ['dfdezruiz2@gmail.com', 'dfernandez@altracorporacion.es'];
 
-module.exports = { emailSender, mailListCrear, mailListModificacion }
+module.exports = { emailSender, mailListCrear, mailListModificacion, enviarEmail }

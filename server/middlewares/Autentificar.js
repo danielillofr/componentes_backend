@@ -14,14 +14,14 @@ let Autentificar = (req, res, next) => {
         if (err) {
             return res.status(200).json({
                 ok: false,
-                errBaseDatos: true,
-                err
+                errBaseDatos: false,
+                err: 'Error de autentificación'
             })
         }
         req.usuario = decoded.usuario;
         console.log(decoded);
+        next();
     });
-    next();
 }
 
 let AutentificarAdmin = (req, res, next) => {

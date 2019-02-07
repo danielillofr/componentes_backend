@@ -11,7 +11,7 @@ const { Autentificar } = require('./../../middlewares/Autentificar');
 
 const { Enviar_mail } = require('./../../utils/mail')
 
-const { mailListModificacion } = require('./../../config/maillists')
+const { mailListModificacion, enviarEmail } = require('./../../config/maillists')
 
 //Obtener un listado con todos los componentes. Cualquier usuario
 
@@ -87,7 +87,7 @@ app.post('/api/movimientos', Autentificar, (req, res) => {
                     html
                 }
 
-                Enviar_mail(mailOptions);
+                if (enviarEmail) Enviar_mail(mailOptions);
             }
         })
 
