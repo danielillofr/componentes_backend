@@ -1,4 +1,5 @@
 const Prcomponente = require('./../../models/prototipos/prcomponente');
+const Logcompro = require('./../../models/prototipos/logcompro')
 const express = require('express');
 const app = express();
 
@@ -85,6 +86,28 @@ app.post('/api/prcomponentes', Autentificar, (req, res) => {
                 err
             })
         }
+        const f = new Date();
+        const fechaMovimiento = f.getDate() + '/' + (f.getMonth() + 1) + '/' + f.getFullYear();
+        console.log('A grabar');
+
+        let logcompro = new Logcompro({
+            componente: prcomponenteDB._id,
+            autor: req.usuario.nombre,
+            fecha: fechaMovimiento,
+            estado: 'Solicitado'
+        });
+        console.log('A grabar2');
+        logcompro.save((err2, logcomproDB) => {
+            console.log('Aqui no llega');
+            if (err2) {
+                console.log('No hay error', err2);
+                return res.json({
+                    err: true,
+                    errBaseDatos: true,
+                    err2
+                })
+            };
+        })
         res.json({
             ok: true,
             prcomponente: prcomponenteDB
@@ -118,12 +141,38 @@ app.delete('/api/prcomponentes/:id', Autentificar, (req, res) => {
 
 app.put('/api/prcomponentes/:id', Autentificar, (req, res) => {
     const body = _.pick(req.body, ['referencia', 'url', 'estado', 'cantidad', 'descripcion', 'codAirzone']);
-    Prcomponente.findByIdAndUpdate(req.params.id, body, { new: true }, (err, prcomponenteDB) => {
+    Prcomponente.findByIdAndUpdate(req.params.id, body, (err, prcomponenteDB) => {
         if (err) {
             return res.json({
                 ok: false,
                 errBaseDatos: true,
                 err
+            })
+        }
+        console.log('Estado nuevo:', body.estado);
+        console.log('Y era:', prcomponenteDB.estado);
+        if ((body.estado) && ((body.estado) != (prcomponenteDB.estado))) { //Ha cambiado el estado
+            const f = new Date();
+            const fechaMovimiento = f.getDate() + '/' + (f.getMonth() + 1) + '/' + f.getFullYear();
+            console.log('A grabar');
+
+            let logcompro = new Logcompro({
+                componente: req.params.id,
+                autor: req.usuario.nombre,
+                fecha: fechaMovimiento,
+                estado: body.estado
+            });
+            console.log('A grabar2');
+            logcompro.save((err2, logcomproDB) => {
+                console.log('Aqui no llega');
+                if (err2) {
+                    console.log('No hay error', err2);
+                    return res.json({
+                        err: true,
+                        errBaseDatos: true,
+                        err2
+                    })
+                };
             })
         }
         res.json({
