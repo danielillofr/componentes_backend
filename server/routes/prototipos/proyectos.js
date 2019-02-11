@@ -24,6 +24,23 @@ app.get('/api/proyectos', Autentificar, (req, res) => {
     })
 })
 
+app.get('/api/proyectos/:id', Autentificar, (req, res) => {
+    Proyecto.findById(req.params.id, (err, proyectoDB) => {
+        if (err) {
+            console.log(err);
+            return res.json({
+                ok: false,
+                errBaseDatos: true,
+                err
+            })
+        }
+        res.json({
+            ok: true,
+            proyecto: proyectoDB
+        })
+    })
+})
+
 app.post('/api/proyectos', Autentificar, (req, res) => {
     const body = req.body;
     if (!body.nombre) {
