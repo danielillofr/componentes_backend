@@ -69,7 +69,7 @@ app.post('/api/proyectos', Autentificar, (req, res) => {
 })
 
 app.put('/api/proyectos/:id', Autentificar, (req, res) => {
-    const body = _.pick(req.body, ['codLista']);
+    const body = _.pick(req.body, ['codLista', 'nombre']);
     Proyecto.findByIdAndUpdate(req.params.id, body, { new: true }, (err, proyectoDB) => {
         if (err) {
             return res.json({

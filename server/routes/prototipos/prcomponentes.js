@@ -7,6 +7,7 @@ const _ = require('underscore');
 const { Autentificar } = require('./../../middlewares/Autentificar');
 
 app.get('/api/prcomponentes', Autentificar, (req, res) => {
+    console.log('Sin ID');
     Prcomponente.find({}, (err, prcomponentes) => {
         if (err) {
             return res.json({
@@ -22,7 +23,26 @@ app.get('/api/prcomponentes', Autentificar, (req, res) => {
     })
 })
 
-app.get('/api/prcomponentes/:proyecto', Autentificar, (req, res) => {
+app.get('/api/prcomponentes/:id', Autentificar, (req, res) => {
+    console.log('Con ID');
+    const id = req.params.id;
+    console.log('ID:', id);
+    Prcomponente.findById(id, (err, prcomponente) => {
+        if (err) {
+            return res.json({
+                ok: false,
+                errBaseDatos: true,
+                err
+            })
+        };
+        res.json({
+            ok: true,
+            prcomponente
+        })
+    })
+})
+
+app.get('/api/prcomponentes/proyecto/:proyecto', Autentificar, (req, res) => {
     const proyecto = req.params.proyecto;
     Prcomponente.find({ proyecto }, (err, prcomponentes) => {
         if (err) {
@@ -97,7 +117,7 @@ app.delete('/api/prcomponentes/:id', Autentificar, (req, res) => {
 })
 
 app.put('/api/prcomponentes/:id', Autentificar, (req, res) => {
-    const body = _.pick(req.body, ['estado']);
+    const body = _.pick(req.body, ['referencia', 'url', 'estado', 'cantidad', 'descripcion', 'codAirzone']);
     Prcomponente.findByIdAndUpdate(req.params.id, body, { new: true }, (err, prcomponenteDB) => {
         if (err) {
             return res.json({
