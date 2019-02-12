@@ -15,12 +15,14 @@ let urgenciasValidas = {
 const componenteSchema = new Schema({
     referencia: {
         type: String,
-        required: [true, 'La referencia es obligatorio'],
-        unique: true
+        default: 'Sin referencia'
+            // required: [true, 'La referencia es obligatorio'],
+            // unique: true
     },
     fabricante: {
         type: String,
-        required: [true, 'El fabricante es obligatorio']
+        default: 'Sin fabricante'
+            // required: [true, 'El fabricante es obligatorio']
     },
     descripcion: {
         type: String,
@@ -32,7 +34,8 @@ const componenteSchema = new Schema({
     },
     cantidad: {
         type: Number,
-        required: [true, 'La referencia es obligatorio']
+        default: '0'
+            // required: [true, 'La referencia es obligatorio']
     },
     estado: {
         type: String,

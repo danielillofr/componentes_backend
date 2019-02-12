@@ -59,13 +59,14 @@ app.get('/api/componentes/:id', Autentificar, function(req, res) {
 
 app.post('/api/componentes', Autentificar, (req, res) => {
     let body = req.body;
-    if ((!body.referencia) || (!body.fabricante) || (!body.fechaEntrada) || (!body.cantidad)) {
+    if (!body.fechaEntrada) {
         return res.status(200).json({
             ok: false,
             errBaseDatos: false,
-            err: 'Referencia, fabricante, fecha de entrada y cantidad'
+            err: 'Fecha de entrada requerida'
         })
     }
+    console.log(body);
     let componente = new Componente({
         referencia: body.referencia,
         fabricante: body.fabricante,

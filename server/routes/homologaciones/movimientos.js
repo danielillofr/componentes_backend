@@ -41,11 +41,11 @@ app.get('/api/movimientos/:id', Autentificar, function(req, res) {
 
 app.post('/api/movimientos', Autentificar, (req, res) => {
     let body = req.body;
-    if ((!body.componente) || (!body.almacen) || (!body.cantidad)) {
+    if ((!body.componente) || (!body.almacen)) {
         return res.status(200).json({
             ok: false,
             errBaseDatos: false,
-            err: 'Componente, almacen y cantidad son requeridos'
+            err: 'Componente y almacen son requeridos'
         })
     }
     const f = new Date();

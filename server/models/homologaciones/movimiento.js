@@ -19,7 +19,7 @@ const movimientoSchema = new Schema({
     },
     cantidad: {
         type: String,
-        required: [true, 'La cantidad es obligatoria']
+        default: '0'
     },
     fechaMovimiento: {
         type: String,
