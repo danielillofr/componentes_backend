@@ -3,7 +3,7 @@ const emailSender = {
     password: 'altraAirzone'
 }
 
-const enviarEmail = false;
+const enviarEmail = true;
 
 const mailListCrear = ['dfdezruiz@gmail.com', 'dfernandez@altracorporacion.es'];
 
