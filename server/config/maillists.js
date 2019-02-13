@@ -5,8 +5,6 @@ const emailSender = {
 
 const enviarEmail = true;
 
-const mailListCrear = ['dfdezruiz@gmail.com', 'dfernandez@altracorporacion.es'];
+const mailListModificacion = ['fdelgado@altracorporacion.es', 'sgarcia@altracorporacion.es', 'etoscano@altracorporacion.es', 'avelasco@altracorporacion.es', 'dfernandez@altracorporacion.es'];
 
-const mailListModificacion = ['dfdezruiz2@gmail.com', 'dfernandez@altracorporacion.es'];
-
-module.exports = { emailSender, mailListCrear, mailListModificacion, enviarEmail }
+module.exports = { emailSender, mailListModificacion, enviarEmail }

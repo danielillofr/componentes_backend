@@ -8,7 +8,7 @@ const _ = require('underscore');
 
 const { Enviar_mail } = require('./../../utils/mail');
 
-const { mailListCrear, enviarEmail } = require('./../../config/maillists')
+const { mailListModificacion, enviarEmail } = require('./../../config/maillists')
 
 const { Autentificar } = require('./../../middlewares/Autentificar');
 
@@ -102,7 +102,7 @@ app.post('/api/componentes', Autentificar, (req, res) => {
 
         let mailOptions = {
             from: 'Componentes',
-            to: mailListCrear,
+            to: mailListModificacion,
             subject: Asunto,
             html
         }

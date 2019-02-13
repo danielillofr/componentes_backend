@@ -30,7 +30,8 @@ app.get('/api/usuarios', Autentificar, function(req, res) {
 
 app.post('/api/usuarios', [Autentificar, AutentificarAdmin], (req, res) => {
     let body = req.body;
-    if ((!body.nombre) || (!body.clave)) {
+    console.log(body);
+    if (!body.nombre) {
         return res.status(200).json({
             ok: false,
             errBaseDatos: false,
@@ -81,6 +82,17 @@ app.post('/api/usuarios/login', (req, res) => {
                 errBaseDatos: false,
                 err: 'Usuario no existe'
             })
+        }
+        if (bcrypt.compareSync('', usuarioDB.clave)) {
+            console.log('Usuario sin clave, asumimos la clave que viene');
+            usuarioDB.clave = bcrypt.hashSync(body.clave, 10);
+            Usuario.findByIdAndUpdate(usuarioDB._id, { clave: usuarioDB.clave }, (err2, usuario2DB) => {
+                if (err2) {
+                    console.log('Error:', err2);
+                } else {
+                    console.log('Usuario:', usuario2DB);
+                }
+            });
         }
         if (!(bcrypt.compareSync(body.clave, usuarioDB.clave))) {
             return res.status(200).json({ //Contraseña incorrecta
