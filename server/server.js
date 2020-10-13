@@ -30,6 +30,10 @@ app.use(require('./routes/prototipos/prcomponentes'));
 app.use(require('./routes/prototipos/proyectos'));
 app.use(require('./routes/prototipos/logcompro'));
 
+app.get('*', function(req, res) {
+    res.sendfile('./public/index.html')
+})
+
 app.listen(process.env.PORT, () => {
     console.log('Escuchando puerto: ', 3000);
 });

@@ -310,6 +310,11 @@ app.put('/api/prcomponentes/:id', Autentificar, (req, res) => {
                 html = html + '<br>Cantidad: ' + cantidad;
             }
 
+
+            html = html + '<br><br><a href=\'http://127.0.0.1:3000/modcompproy/' + prcomponenteDB.proyecto + '/' + prcomponenteDB._id + '\'>Acceda</a>';
+
+            console.log(html);
+
             console.log(html);
 
             let mailOptions = {
